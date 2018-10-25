@@ -6,21 +6,24 @@ import {dom, library} from '@fortawesome/fontawesome-svg-core'
 import {fas} from '@fortawesome/free-solid-svg-icons'
 import Home from 'jworker/containers/Home';
 import {Provider} from "react-redux";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import {HashRouter, Route} from "react-router-dom";
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 
 library.add(fas);
 dom.watch();
 
 const store = createStore(() => {
-});
+    },
+    applyMiddleware(logger, thunk));
 
 ReactDOM.render(
-  <Provider store={store}>
-    <HashRouter>
-      <Route path="/" component={Home}/>
-    </HashRouter>
+    <Provider store={store}>
+        <HashRouter>
+            <Route path="/" component={Home}/>
+        </HashRouter>
 
-  </Provider>
-  , document.getElementById('root'));
+    </Provider>
+    , document.getElementById('root'));
 registerServiceWorker();
