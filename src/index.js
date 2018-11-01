@@ -15,9 +15,19 @@ import {cityReducer} from "./jworker/reducers/cityReducer";
 library.add(fas);
 dom.watch();
 
-const store = createStore(
-    combineReducers({city:cityReducer}),
-    applyMiddleware(logger, thunk));
+const store = applyMiddleware(logger, thunk)(createStore)(
+    combineReducers({city: cityReducer}),
+    {
+        city: {
+            1: {
+                id: 1
+            }
+            ,
+            2: {
+                id: 2
+            }
+        }
+    });
 
 ReactDOM.render(
     <Provider store={store}>

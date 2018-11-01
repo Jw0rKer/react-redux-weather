@@ -4,12 +4,13 @@ export const ACTION = {
     LOAD_ERROR: 'LOAD_ERROR'
 }
 
-const loadInit = () => ({
+const loadInit = (id) => ({
     type: ACTION.LOAD_INIT,
-    loading: true
+    loading: true,
+    id:id
 })
 
-const loadSuccess = (res) => ({
+const loadSuccess = (id,res) => ({
     type: ACTION.LOAD_SUCCESS,
     name: res.name,
     weatherIcon: res.weather[0].main,
@@ -18,19 +19,25 @@ const loadSuccess = (res) => ({
     humidity: res.main.humidity,
     min: res.main.temp_min,
     max: res.main.temp_max,
-    loading: false
+    loading: false,
+    id:id
 })
 
-const loadError = (message) => ({
+const loadError = (id,message) => ({
     type: ACTION.LOAD_ERROR,
     error: message,
-    loading: false
+    loading: false,
+    id:id
 })
 
 
-export const load = (url) => (dispatch, store) => {
-    dispatch(loadInit());
-    fetch(url)
-        .then(res => res.json(),err=>dispatch(loadError(err)))
-        .then(data => dispatch(loadSuccess(data)));
+export const load = (id) => (dispatch, store) => {
+    dispatch(loadInit(id));
+    fetch('/current/1')
+        .then(res => res.json(),err=>dispatch(loadError(id,err)))
+        .then(data => dispatch(loadSuccess(id,data)));
+}
+
+export const loadAll= () => (dispatch, getStore) => {
+    Object.keys(getStore().city).map(id=>dispatch(load(id)));
 }

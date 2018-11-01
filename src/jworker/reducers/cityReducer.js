@@ -5,25 +5,34 @@ export const cityReducer = (state = {}, action) => {
         case ACTION.LOAD_INIT:
             return {
                 ...state,
-                loading: action.loading
+                [action.id]: {
+                    ...state[action.id],
+                    loading: action.loading
+                }
             }
         case ACTION.LOAD_SUCCESS:
             return {
                 ...state,
-                loading: action.loading,
-                name: action.name,
-                weatherIcon: action.weatherIcon,
-                temp: action.temp,
-                pressure: action.pressure,
-                humidity: action.humidity,
-                min: action.min,
-                max: action.max
+                [action.id]: {
+                    ...state[action.id],
+                    loading: action.loading,
+                    name: action.name,
+                    weatherIcon: action.weatherIcon,
+                    temp: action.temp,
+                    pressure: action.pressure,
+                    humidity: action.humidity,
+                    min: action.min,
+                    max: action.max
+                }
             }
         case ACTION.LOAD_ERROR:
             return {
                 ...state,
-                loading: action.loading,
-                error: action.error
+                [action.id]: {
+                    ...state[action.id],
+                    loading: action.loading,
+                    error: action.error
+                }
             }
         default:
             return state
