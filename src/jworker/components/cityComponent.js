@@ -2,7 +2,7 @@ import React from 'react';
 
 
 export const City = ({name, weatherIcon, temp, pressure, humidity, min, max, loading}) => (
-    <div className="col-2 card">
+    <div className="card">
         {(loading) ?
             <div className="card-body">
                 loading

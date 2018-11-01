@@ -5,21 +5,24 @@ import * as CityAction from 'jworker/actions/cityActions';
 
 class HomeContainer extends Component {
     componentWillMount() {
-        console.log('componentWillMount')
         this.props.init();
     }
+
     render() {
-        return Object.values(this.props.cityList).map(m =>
-            (<City name={m.name}
-                   weatherIcon={m.weatherIcon}
-                   temp={m.temp}
-                   pressure={m.pressure}
-                   humidity={m.humidity}
-                   min={m.min}
-                   max={m.max}
-                   loading={m.loading}
-            />)
-        )
+        return <div className="row m-3">
+            {Object.values(this.props.cityList).map(m =>
+                <div className="col-3">
+                    <City name={m.name}
+                          weatherIcon={m.weatherIcon}
+                          temp={m.temp}
+                          pressure={m.pressure}
+                          humidity={m.humidity}
+                          min={m.min}
+                          max={m.max}
+                          loading={m.loading}/>
+                </div>
+            )}
+        </div>
     }
 }
 
