@@ -10,11 +10,11 @@ export const City = ({name, weatherIcon, temp, pressure, humidity, min, max, loa
             :
             <div className="card-body">
                 <div className="col">name: {name}</div>
-                < div className="col">temp: {temp}</div>
-                <div className="col">pressure: {pressure}</div>
-                <div className="col">humidity: {humidity}</div>
-                <div className="col">min: {min}</div>
-                <div className="col">max: {max}</div>
+                {temp?<div className="col">temp: {temp}</div>:""}
+                {pressure?<div className="col">pressure: {pressure}</div>:""}
+                {humidity?<div className="col">humidity: {humidity}</div>:""}
+                {min?<div className="col">min: {min}</div>:""}
+                {max?<div className="col">max: {max}</div>:""}
             </div>
         }
     </div>
